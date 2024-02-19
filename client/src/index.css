@@ -1,17 +1,35 @@
+.body{
+  font-family: sans-serif;
+}
 .login-container{
-  height: 90vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  background: linear-gradient(45deg,#c2b0eb89,#9177c881,#c2b0eb89,#9177c881,#c2b0eb89,#9177c881);
+  background-size: 300%,300%;
+  animation: color 12s ease-in-out infinite;
 }
 
+@keyframes color{
+  0%{
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 0% 50%;
+  }
+}
 .form_main {
   width: 280px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   padding: 30px 30px 30px 30px;
   border-radius: 30px;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.062);
@@ -42,7 +60,7 @@
   height: 40px;
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid rgb(173, 173, 173);
+  border-bottom: 2px solid rgba(80, 80, 80, 0.74);
   border-radius: 30px;
   margin: 10px 0;
   color: black;
@@ -54,7 +72,7 @@
 
 .inputField:focus {
   outline: none;
-  border-bottom: 2px solid rgb(218, 179, 243);
+  border-bottom: 2px solid #ce9dffd2;
 }
 
 .inputField::placeholder {
@@ -66,15 +84,15 @@
 #button {
   position: relative;
   width: 100%;
-  border: 2px solid #c391f5;
-  background-color: #c497f2;
+  border: 2px solid #CE9DFF;
+  background-color: #CE9DFF;
   height: 40px;
   color: white;
-  font-size: .8em;
+  font-size: .9em;
   font-weight: 500;
   letter-spacing: 1px;
   border-radius: 30px;
-  margin: 10px;
+  margin-top: 10px;
   cursor: pointer;
   overflow: hidden;
 }
@@ -114,7 +132,7 @@
 }
 
 .signupContainer a {
-  font-size: .7em;
+  font-size: .9em;
   font-weight: 500;
   background-color: #2e2e2e;
   color: white;
@@ -122,4 +140,260 @@
   padding: 8px 15px;
   border-radius: 20px;
 }
+/* ===========================Home============================ */
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
 
+.text, .image {
+  width: 100%;
+}
+
+.text {
+  order: 2; /* Display text below image on small screens */
+}
+
+.image {
+  order: 1; 
+  max-width: 500px;
+  min-width: 200px;
+}
+
+.image img {
+  padding-top: 10%;
+  max-width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .text, .image {
+    width: 50%;
+  }
+
+  .text {
+    padding-right: 20px;
+    order: 1;
+  }
+
+  .image{
+    order:2;
+    min-width: 300px;
+  }
+}
+
+.home-button {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  padding-block: 0.5rem;
+  padding-inline: 1.25rem;
+  background-color: #CE9DFF;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffff;
+  gap: 10px;
+  font-weight: bold;
+  border: 3px solid #ffffff4d;
+  outline: none;
+  overflow: hidden;
+  font-size: 15px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.home-button:hover {
+  transform: scale(1.05);
+  border-color: #fff9;
+}
+
+.home-button:hover .icon {
+  transform: translate(4px);
+}
+
+.home-button:hover::before {
+  animation: shine 1.5s ease-out infinite;
+}
+
+.home-button::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0) 70%
+  );
+  top: 0;
+  left: -100px;
+  opacity: 0.6;
+}
+
+@keyframes shine {
+  0% {
+    left: -100px;
+  }
+
+  60% {
+    left: 100%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+/* ===============================seatbookingList============ */
+
+.main-container{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.seatbooking-container
+{
+  background-color: #f0f0f0;
+  padding: 1rem 3rem;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+}
+
+.seat-demo{
+  display: flex;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.seat{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.seat-row {
+  display: flex;
+  gap: 15px; /* Adjust as needed */
+  margin-bottom: 10px; /* Adjust as needed */
+}
+
+.ticket-item
+{
+  height: 30px;
+  width: 30px;
+  list-style-type: none;
+  margin: 0.5 rem;
+  padding: 2px ;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  
+}
+.selected {
+  background-color:  #CE9DFF;
+  color: white;
+}
+
+.spacer {
+  width: 20px; 
+}
+
+@media (max-width: 768px) {
+  .seatbooking-container {
+    padding: 0.5rem;
+  }
+
+  .ticket-item {
+    height: 25px;
+    width: 25px;
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 576px) {
+  .seat-demo {
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+  }
+  .seat{
+    margin: -10px;
+  }
+  .seat-row {
+    justify-content: center;
+  }
+
+  .ticket-item {
+    height: 20px;
+    width: 20px;
+    font-size: 0.6em;
+  }
+}
+
+
+/* ===========================BookingForm============== */
+
+.booking-form-container {
+  width: 100%; 
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #ce9dff52;
+  padding: 10px 50px 30px 50px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-top: 20px; 
+  text-align: center;
+}
+.form-container p{
+  margin-bottom: 0px;
+  padding-left: 10px;
+}
+.form-container {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.form-input{
+  background-color: white;
+}
+
+.form-input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+
+
+@media (max-width: 768px) {
+  .booking-form-container {
+    padding: 10px;
+  }
+
+  .input,
+  .button {
+    width: calc(100% - 16px); 
+  }
+}
