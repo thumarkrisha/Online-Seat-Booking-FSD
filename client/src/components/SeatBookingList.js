@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import { createSearchParams, useNavigate } from 'react-router-dom';
-import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom';
+
 
 export default function SeatBookingList() {
 
   const navigate = useNavigate();
-
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [displaySeats, setDisplaySeats] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState('');
+
   const handleSeatClick = (rowIndex, seatIndex) => {
     const seat = `${rowIndex}-${seatIndex}`;
     if (selectedSeats.includes(seat)) {
@@ -37,8 +39,9 @@ export default function SeatBookingList() {
       </div>
     )); 
     
-    const handleSubmit = () =>{ navigate('/book',{ state: { bookSeat: displaySeats } })}
-
+     const handleSubmit = () =>{ 
+    navigate('/book',{ state: { bookSeat: displaySeats, date: selectedDate, time: selectedTime } });
+  }
     const seats = [
       ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10"],
       ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10"],
@@ -50,6 +53,25 @@ export default function SeatBookingList() {
     ];
 
   return (
+    <>
+    <div className="date-time-container">
+      <div className='date-time'>
+      <div className='time-date'>
+    <label>Date:</label>
+    <input type="date" defaultValue={new Date().toISOString().split('T')[0]} selected={selectedDate} onChange={date => setSelectedDate(date)} />
+    </div>
+    <div className='time-date'>
+    <label>Time:</label>
+    <select value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)} className='time'>
+      <option value="10:00 AM">10:00 AM</option>
+      <option value="1:00 PM">1:00 PM</option>
+      <option value="4:00 PM">4:00 PM</option>
+      <option value="7:00 PM">7:00 PM</option>
+    </select>
+    </div>
+    </div>
+  </div>
+
     <div className='main-container'>
     <div className='seatbooking-container'>
       <div className='seat-demo'>
@@ -80,6 +102,7 @@ export default function SeatBookingList() {
     </div>
     </div>
     </div>
+    </>
   )
 }
 

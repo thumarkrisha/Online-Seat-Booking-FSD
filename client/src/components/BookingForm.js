@@ -5,6 +5,8 @@ export default function BookingForm() {
 
   const {state} = useLocation();
   const bookSeat = state.bookSeat;
+  const date = state.date;
+  const time = state.time;
 
   const [formData, setFormData] = useState({
     name_0: '',
@@ -53,7 +55,7 @@ export default function BookingForm() {
         ))}
       </div>
       <button id="button" className="book-button" onClick={handleSubmit}>
-        Book Now
+          Proceed For Payment
       </button>
     </div>
   );

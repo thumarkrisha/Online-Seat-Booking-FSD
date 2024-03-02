@@ -258,9 +258,37 @@
 }
 
 /* ===============================seatbookingList============ */
+.date-time-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25vh;
+  
 
+}
+.date-time{
+  display: flex;
+  gap: 40px;
+  font-size: 1.3rem;
+  background-color: #f0f0f0;
+  padding: 1rem 3rem;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+}
+.time-date{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:8px;
+}
+
+.time{
+  background-color: white;
+    border: 1px solid #838181c8; 
+    border-radius: 2px;
+}
 .main-container{
-  height: 100vh;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;

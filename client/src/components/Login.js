@@ -15,15 +15,12 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform login logic here using the state variables (username, password, and possibly email)
     console.log('Submitted:', { username, password});
-    // Reset the form after submission if needed
     setUsername('');
     setPassword('');
   };
   return (
     <>
-    
     <div className="login-container" >
     <form className="form_main" action="">
     <p className="heading">Login</p>
