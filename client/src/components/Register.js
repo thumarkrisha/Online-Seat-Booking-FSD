@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Register() {
 
     const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const navigate =useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -21,12 +23,23 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform login logic here using the state variables (username, password, and possibly email)
+    
     console.log('Submitted:', { username, password, email });
-    // Reset the form after submission if needed
-    setUsername('');
-    setPassword('');
-    setEmail('');
+    e.preventDefault();
+
+    axios.post('http://localhost:8080/api/user/register', {
+        username,
+        password,
+        email,
+    })
+    .then(response => {
+        console.log('Registration successful');
+        navigate("/login")
+    })
+    .catch(error => {
+        console.error('Registration failed:', error);
+        // Handle registration failure (e.g., display error message)
+    });
   };
   return (
     <>

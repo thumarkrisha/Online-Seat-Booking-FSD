@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -15,9 +19,21 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitted:', { username, password});
-    setUsername('');
-    setPassword('');
+    axios.post('http://localhost:8080/api/user/login', {
+            username,
+            password,
+        })
+        .then(response => {
+            console.log('Login successful');
+            localStorage.setItem("username",username);
+            console.log(localStorage.getItem("username"))
+            navigate("/home")
+            
+        })
+        .catch(error => {
+          console.error('Login failed:', error.response.data);
+          setErrorMessage(error.response.data);
+        });
   };
   return (
     <>
@@ -42,7 +58,6 @@ export default function Login() {
     <button id="button" onClick={handleSubmit}>Submit</button>
     <div className="signupContainer">
         <p>Don't have any account?</p>
-        {/* <a href="#">Sign up</a> */}
         <Link to="/register">Sign up</Link>
     </div>
 </form>

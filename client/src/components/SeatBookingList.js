@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-
 export default function SeatBookingList() {
 
   const navigate = useNavigate();
@@ -26,9 +25,10 @@ export default function SeatBookingList() {
     seatsArray.map((row, rowIndex) => (
       <div key={rowIndex} className='seat-row'>
         {row.map((seat, seatIndex) => (
+          
         <React.Fragment key={`${rowIndex}-${seatIndex}`}>
         <div
-          className={`ticket-item ${selectedSeats.includes(`${rowIndex}-${seatIndex}`) ? 'selected' : ''}`}
+          className={`ticket-item ${selectedSeats.includes(`${rowIndex}-${seatIndex}`) ? 'selected' : ""}`}
           onClick={() => handleSeatClick(rowIndex, seatIndex)}
         >
           {seat}
@@ -82,7 +82,7 @@ export default function SeatBookingList() {
         </div>
         <div className='seat'>
           <h4>Booked </h4>
-          <div className='ticket-item' style={{ background: "#b6b4b4" }}>
+          <div className='ticket-item booked'>
           </div>
         </div>
         <div className='seat'>
