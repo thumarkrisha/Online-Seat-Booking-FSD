@@ -72,7 +72,7 @@
 
 .inputField:focus {
   outline: none;
-  border-bottom: 2px solid #ce9dffd2;
+  border-bottom: 2px solid #CE9DFF;
 }
 
 .inputField::placeholder {
@@ -126,12 +126,14 @@
 }
 
 .signupContainer p {
+  margin-top: 20px;
   font-size: .9em;
   font-weight: 500;
   color: black;
 }
 
 .signupContainer a {
+  margin-top: -25px;
   font-size: .9em;
   font-weight: 500;
   background-color: #2e2e2e;
@@ -391,7 +393,7 @@
   width: 100%; 
   max-width: 500px;
   margin: 0 auto;
-  background-color: #ce9dff52;
+  background-color:#eee1fcf6;
   padding: 10px 50px 30px 50px;
   border-radius: 10px;
   box-sizing: border-box;
@@ -458,4 +460,40 @@
 
 .navlink .active{
   color: #CE9DFF;
+}
+
+/* ======================success==================== */
+.success-container-main{
+ height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.success-container{
+  width: 100%; 
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #eee1fcf6;
+  padding: 50px 50px 50px 50px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin-top: 20px; 
+  text-align: center;
+
+}
+.successfull{
+  font-family:Times New Roman, Times, serif;
+  font-size: 1.8rem;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.pnrnumber{
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.seat-no{
+  font-size: 1.2rem;
 }

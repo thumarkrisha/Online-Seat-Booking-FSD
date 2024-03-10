@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import { useState } from 'react';
 import BookingForm from './components/BookingForm';
+import Success from './components/Success';
 
 function App() {
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -20,6 +21,7 @@ function App() {
         <Route exact path='/home' Component={Home}/>
         <Route exact path='/seat' Component={SeatBookingList} />
         <Route exact path='/book' Component={BookingForm}/>
+        <Route exact path="success" Component={Success}/>
       </Routes>
     </BrowserRouter>
     </>

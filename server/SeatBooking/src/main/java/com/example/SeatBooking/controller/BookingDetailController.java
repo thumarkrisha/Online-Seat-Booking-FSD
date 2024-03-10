@@ -44,4 +44,5 @@ public class BookingDetailController {
         return bookingDetailRepo.saveAll(bookingDetails);
     }
 
+
 }
