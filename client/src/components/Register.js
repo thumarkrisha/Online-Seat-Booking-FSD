@@ -9,6 +9,8 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const navigate =useNavigate();
 
+  
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -34,7 +36,7 @@ export default function Register() {
     })
     .then(response => {
         console.log('Registration successful');
-        navigate("/login")
+        navigate("/")
     })
     .catch(error => {
         console.error('Registration failed:', error);

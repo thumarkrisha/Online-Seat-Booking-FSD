@@ -18,6 +18,9 @@ public class BookingDetail {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_booking_id",referencedColumnName = "id")
+    private UserBooking userBooking;
 
 
     public Long getId() {
@@ -66,5 +69,13 @@ public class BookingDetail {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public UserBooking getUserBooking() {
+        return userBooking;
+    }
+
+    public void setUserBooking(UserBooking userBooking) {
+        this.userBooking = userBooking;
     }
 }

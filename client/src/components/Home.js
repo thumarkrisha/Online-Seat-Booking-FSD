@@ -1,12 +1,16 @@
 import React from 'react'
 import seat from '../images/Seat2.png'
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
 export default function Home() {
 
   const navigate = useNavigate();
   return (
+    <>
+    <Navbar/>
     <div className="container">
+     
     <div className="text">
       <h1>Welcome to Our Seat Booking Platform</h1>
       <h3>Discover the Easiest Way to Book Your Preferred Seats</h3>
@@ -22,5 +26,6 @@ export default function Home() {
       <img src={seat} alt="Seat Booking Platform Image"/>
     </div>
   </div>  
+  </>
   );
 }

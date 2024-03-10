@@ -107,17 +107,17 @@ export default function SeatBookingList() {
     <div className='seatbooking-container'>
       <div className='seat-demo'>
         <div className='seat'>
-          <h4>Availble </h4>
+          <div>Available </div>
           <div className='ticket-item' >
           </div>
         </div>
         <div className='seat'>
-          <h4>Booked </h4>
+          <div>Booked </div>
           <div className='ticket-item booked'>
           </div>
         </div>
         <div className='seat'>
-          <h4>Selected </h4>
+          <div>Selected </div>
           <div className='ticket-item selected'>
           </div>
         </div>

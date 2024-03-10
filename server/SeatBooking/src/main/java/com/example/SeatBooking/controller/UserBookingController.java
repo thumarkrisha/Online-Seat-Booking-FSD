@@ -31,7 +31,6 @@ public class UserBookingController {
         }
 
         userBookings.setUser(user);
-
         return userBookingRepo.save(userBookings);
     }
 

@@ -20,6 +20,19 @@ export default function BookingForm() {
     }))
   );
 
+  function generateUniqueNumber() {
+    const timestamp = new Date().getTime(); 
+    const randomSuffix = Math.floor(Math.random() * 100000); 
+  
+    const uniqueNumber = `${timestamp}${randomSuffix}`;
+  
+    return uniqueNumber;
+  }
+  
+  // Usage
+  const uniqueNumber = generateUniqueNumber();
+  console.log(uniqueNumber);
+
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => {
@@ -32,7 +45,7 @@ export default function BookingForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
    const bookingData = Array.from(formData);
@@ -40,10 +53,11 @@ export default function BookingForm() {
    const booking = {
     date: date,
     time: time,
-    seats: bookSeat
+    seats: bookSeat,
+    pnrNumber:uniqueNumber
   };
   
-  axios.post('http://localhost:8080/api/userbooking/booking', booking, {
+ await axios.post('http://localhost:8080/api/userbooking/booking', booking, {
   params: {
     username: sessionStorage.getItem('username')
   },
@@ -57,15 +71,21 @@ export default function BookingForm() {
 });
 
 
-    axios.post('http://localhost:8080/api/book/details', 
-        bookingData,{
+   await axios.post("http://localhost:8080/api/book/details", 
+        bookingData,
+        {
           params: {
-            username: sessionStorage.getItem('username') // Replace 'your_username_here' with the actual username
-          }
-        })
+            username: sessionStorage.getItem('username'),
+            pnrNumber:uniqueNumber
+            }
+        }
+        )
     .then(response => {
         console.log('Registration successful');
-        navigate("/login")
+        navigate("/success",{ state: {
+          bookingData: bookingData,
+          pnrNumber: uniqueNumber
+        }})
     })
     .catch(error => {
         console.error('Registration failed:', error);
@@ -111,7 +131,7 @@ export default function BookingForm() {
         ))}
       </div>
       <button id="button" className="book-button" onClick={handleSubmit}>
-        Proceed For Payment
+        Book
       </button>
     </div>
   );

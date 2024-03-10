@@ -17,6 +17,9 @@ public class UserBooking {
     private String time;
     @Column(name = "current_date_time")
     private LocalDateTime currentDateTime;
+
+    @Column(unique = true)
+    private String pnrNumber;
     @ElementCollection
     private List<String> seats;
 
@@ -73,6 +76,14 @@ public class UserBooking {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getPnrNumber() {
+        return pnrNumber;
+    }
+
+    public void setPnrNumber(String pnrNumber) {
+        this.pnrNumber = pnrNumber;
     }
 }
 
