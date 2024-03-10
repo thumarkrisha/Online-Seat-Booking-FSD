@@ -25,7 +25,7 @@ export default function Login() {
         })
         .then(response => {
             console.log('Login successful');
-            localStorage.setItem("username",username);
+            sessionStorage.setItem("username",username);
             console.log(localStorage.getItem("username"))
             navigate("/home")
             

@@ -1,18 +1,20 @@
+import axios from "axios";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function BookingForm() {
   const { state } = useLocation();
   const bookSeat = state.bookSeat;
   const date = state.date;
   const time = state.time;
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState(
     bookSeat.map((seat, index) => ({
       seatNo: seat,
       name: "",
       age: "",
-      gender: ""
+      gender: "",
     }))
   );
 
@@ -30,7 +32,25 @@ export default function BookingForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const bookingData = formData.map(data => ({
+      seatNo: data.seatNo,
+      name: data.name,
+      age: data.age,
+      gender: data.gender
+    }));
   
+    axios.post('http://localhost:8080/api/userbooking/booking', {
+        bookingData
+    })
+    .then(response => {
+        console.log('Registration successful');
+        navigate("/login")
+    })
+    .catch(error => {
+        console.error('Registration failed:', error);
+        // Handle registration failure (e.g., display error message)
+    });
     console.log(formData);
   };
 
