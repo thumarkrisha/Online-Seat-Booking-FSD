@@ -1,9 +1,9 @@
 package com.example.SeatBooking.repository;
 
-import com.example.SeatBooking.entity.UserBooking;
+import com.example.SeatBooking.entity.BookingDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserBookingRepo extends JpaRepository<UserBooking,Long> {
+public interface BookingDetailRepo extends JpaRepository<BookingDetail,Long> {
 
 
 }

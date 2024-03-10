@@ -6,7 +6,9 @@ export default function BookingForm() {
   const { state } = useLocation();
   const bookSeat = state.bookSeat;
   const date = state.date;
+  console.log(date);
   const time = state.time;
+  console.log(time);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState(
@@ -33,16 +35,34 @@ export default function BookingForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const bookingData = formData.map(data => ({
-      seatNo: data.seatNo,
-      name: data.name,
-      age: data.age,
-      gender: data.gender
-    }));
+   const bookingData = Array.from(formData);
+
+   const booking = {
+    date: date,
+    time: time,
+    seats: bookSeat
+  };
   
-    axios.post('http://localhost:8080/api/userbooking/booking', {
-        bookingData
-    })
+  axios.post('http://localhost:8080/api/userbooking/booking', booking, {
+  params: {
+    username: sessionStorage.getItem('username')
+  },
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}).then(response => {
+  console.log("Details stored");
+}).catch(error => {
+  console.error('fail to store data', error);
+});
+
+
+    axios.post('http://localhost:8080/api/book/details', 
+        bookingData,{
+          params: {
+            username: sessionStorage.getItem('username') // Replace 'your_username_here' with the actual username
+          }
+        })
     .then(response => {
         console.log('Registration successful');
         navigate("/login")

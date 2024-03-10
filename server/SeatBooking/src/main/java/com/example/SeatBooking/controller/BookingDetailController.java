@@ -1,8 +1,8 @@
 package com.example.SeatBooking.controller;
 
 import com.example.SeatBooking.entity.User;
-import com.example.SeatBooking.entity.UserBooking;
-import com.example.SeatBooking.repository.UserBookingRepo;
+import com.example.SeatBooking.entity.BookingDetail;
+import com.example.SeatBooking.repository.BookingDetailRepo;
 import com.example.SeatBooking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,26 +11,26 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/userbooking")
-public class UserBookingController {
+@RequestMapping("/api/book")
+public class BookingDetailController {
     @Autowired
-    private UserBookingRepo userBookingRepo;
+    private BookingDetailRepo bookingDetailRepo;
 
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("/booking")
-    public List<UserBooking> Booking(@RequestBody List<UserBooking> userBookings, @RequestParam String username) {
+    @PostMapping("/details")
+    public List<BookingDetail> Booking(@RequestBody List<BookingDetail> bookingDetails, @RequestParam String username) {
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new IllegalArgumentException("User not found");
         }
 
-        for (UserBooking userBooking : userBookings) {
-            userBooking.setUser(user);
+        for (BookingDetail bookingDetail : bookingDetails) {
+            bookingDetail.setUser(user);
         }
 
-        return userBookingRepo.saveAll(userBookings);
+        return bookingDetailRepo.saveAll(bookingDetails);
     }
 
 }

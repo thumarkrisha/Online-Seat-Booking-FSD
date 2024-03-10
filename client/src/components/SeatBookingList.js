@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function SeatBookingList() {
@@ -6,11 +7,37 @@ export default function SeatBookingList() {
   const navigate = useNavigate();
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [displaySeats, setDisplaySeats] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState('');
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const [selectedTime, setSelectedTime] = useState("10:00 AM");
+  const [bookedSeats, setBookedSeats] = useState([]);
+  console.log(selectedDate);
+  console.log(bookedSeats);
+
+ useEffect(()=>{
+    const fetchBookedSeats = async (date, time) => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/userbooking/bookedSeats', {
+          params: {
+            date,
+            time,
+          },
+        });
+        setBookedSeats(response.data);
+        console.log('Booked seats:', response.data);
+        // Use bookedSeats as needed in your frontend
+      } catch (error) {
+        console.error('Failed to fetch booked seats:', error);
+      }
+    };
+    fetchBookedSeats(selectedDate, selectedTime);
+},[selectedDate,selectedTime])
 
   const handleSeatClick = (rowIndex, seatIndex) => {
     const seat = `${rowIndex}-${seatIndex}`;
+    if (bookedSeats.includes(seats[rowIndex][seatIndex])) {
+      return; 
+    }
+
     if (selectedSeats.includes(seat)) {
       setSelectedSeats(selectedSeats.filter((selectedSeat) => selectedSeat !== seat));
       setDisplaySeats(displaySeats.filter((displaySeats)=> displaySeats !==  seats[rowIndex][seatIndex]));
@@ -28,7 +55,7 @@ export default function SeatBookingList() {
           
         <React.Fragment key={`${rowIndex}-${seatIndex}`}>
         <div
-          className={`ticket-item ${selectedSeats.includes(`${rowIndex}-${seatIndex}`) ? 'selected' : ""}`}
+         className={`ticket-item ${selectedSeats.includes(`${rowIndex}-${seatIndex}`) ? 'selected' : ''} ${bookedSeats.includes(seats[rowIndex][seatIndex]) ? 'booked' : ''}`}
           onClick={() => handleSeatClick(rowIndex, seatIndex)}
         >
           {seat}
@@ -58,7 +85,11 @@ export default function SeatBookingList() {
       <div className='date-time'>
       <div className='time-date'>
     <label>Date:</label>
-    <input type="date" defaultValue={new Date().toISOString().split('T')[0]} selected={selectedDate} onChange={date => setSelectedDate(date)} />
+    <input type="date" defaultValue={new Date().toISOString().split('T')[0]} selected={selectedDate} onChange={(e) => {
+    const dateValue = e.target.value;
+    setSelectedDate(dateValue);
+    console.log('Selected Date:', dateValue);
+  }} />
     </div>
     <div className='time-date'>
     <label>Time:</label>
