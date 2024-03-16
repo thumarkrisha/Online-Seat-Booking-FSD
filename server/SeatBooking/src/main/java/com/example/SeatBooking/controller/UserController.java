@@ -27,4 +27,25 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
     }
+
+
+    @PatchMapping("/userdata/{username}")
+    public ResponseEntity<String> updateUsername(@PathVariable String username, @RequestBody String newUsername){
+        try{
+            System.out.println(newUsername);
+            User user = userRepository.findByUsername(username);
+            if (user != null) {
+                user.setUsername(newUsername);
+                userRepository.save(user);
+                return ResponseEntity.ok("Username updated");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
+        } catch(Exception ex){
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Update operation failed");
+        }
+    }
+
 }

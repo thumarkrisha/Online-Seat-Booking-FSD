@@ -5,7 +5,6 @@ import axios from 'axios';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -25,14 +24,13 @@ export default function Login() {
         })
         .then(response => {
             console.log('Login successful');
-            localStorage.setItem("username",username);
-            console.log(localStorage.getItem("username"))
+              localStorage.setItem("username",username);
+              console.log(localStorage.getItem("username"))
             navigate("/home")
             
         })
         .catch(error => {
           console.error('Login failed:', error.response.data);
-          setErrorMessage(error.response.data);
         });
   };
   return (
