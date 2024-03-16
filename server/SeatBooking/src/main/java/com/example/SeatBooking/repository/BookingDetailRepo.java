@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface BookingDetailRepo extends JpaRepository<BookingDetail,Long> {
-    List<BookingDetail> findByUserBooking(UserBooking userBooking);
+    List<BookingDetail> findByUserBookingAndSeatNoIn(UserBooking userBooking, List<String> seatNos);
 
 }

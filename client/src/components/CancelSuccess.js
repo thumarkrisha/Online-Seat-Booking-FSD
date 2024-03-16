@@ -3,12 +3,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
 
-const Success = () => {
+const CancelSuccess = () => {
     const { state } = useLocation();
-    const pnrNumber = state?.pnrNumber;
-    const bookingData= state?.bookingData;
-    const { width, height } = useWindowSize();
+    const cancelSeats = state?.cancelSeats;
+    console.log(cancelSeats);
+    const { width, height } = useWindowSize()
     const navigate = useNavigate();
+
   return (
     <><button class="button" onClick={()=>{navigate("/home")}}>
     <div class="button-box">
@@ -30,7 +31,7 @@ const Success = () => {
       </span>
     </div>
   </button>
-    <div className='success-container-main' style={{ position: 'relative' ,zIndex:-2}}>
+      <div className='success-container-main' style={{ position: 'relative' ,zIndex:-2}}>
         <Confetti
       width={width}
       height={height}
@@ -38,23 +39,22 @@ const Success = () => {
          />
         <div className='success-container'>
         <div className='successfull'>
-        Successfully Seats are booked
+        Successfully Seats are Cancelled
         </div>
-        <div className='pnrnumber'>
-            PNR No:  {pnrNumber}
-        </div>  
+       
         <div className='seat-no'>
-            Seat No : {bookingData.map((seat, index) => (
+            Seat No : {cancelSeats.map((seat, index) => (
         <span key={index}>
-            {seat.seatNo}
-            {index < bookingData.length - 1 && ', '}
+            {seat}
+            {index < cancelSeats.length - 1 && ', '}
         </span>
     ))}
         </div>
         </div>
     </div>
     </>
+
   )
 }
 
-export default Success;
+export default CancelSuccess;

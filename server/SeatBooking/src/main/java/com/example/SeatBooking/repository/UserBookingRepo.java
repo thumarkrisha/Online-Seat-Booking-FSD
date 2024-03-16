@@ -16,5 +16,6 @@ public interface UserBookingRepo extends JpaRepository<UserBooking,Long> {
 
     UserBooking findByPnrNumber(String pnrNumber);
 
-
+    @Query("SELECT ub.seats FROM UserBooking ub WHERE ub.pnrNumber= :pnrNumber")
+    List<String> findSeatsByPnrNumber(String pnrNumber);
 }

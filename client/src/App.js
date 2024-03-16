@@ -8,6 +8,8 @@ import Home from './components/Home';
 import { useState } from 'react';
 import BookingForm from './components/BookingForm';
 import Success from './components/Success';
+import Cancel from './components/Cancel';
+import CancelSuccess from './components/CancelSuccess';
 
 function App() {
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -22,6 +24,8 @@ function App() {
         <Route exact path='/seat' Component={SeatBookingList} />
         <Route exact path='/book' Component={BookingForm}/>
         <Route exact path="success" Component={Success}/>
+        <Route exact path="/cancel" Component={Cancel}/>
+        <Route exact path='/cancelsuccess' Component={CancelSuccess}/>
       </Routes>
     </BrowserRouter>
     </>

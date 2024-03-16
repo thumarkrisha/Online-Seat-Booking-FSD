@@ -81,6 +81,27 @@ export default function SeatBookingList() {
 
   return (
     <>
+   <button class="button" onClick={()=>{navigate("/home")}}>
+  <div class="button-box">
+    <span class="button-elem">
+      <svg viewBox="0 0 46 66" xmlns="http://www.w3.org/2000/svg">
+        <path
+           d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
+            fill='#CE9DFF'
+        ></path>
+      </svg>
+    </span>
+    <span class="button-elem">
+      <svg viewBox="0 0 46 66">
+        <path
+           d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
+           fill='#CE9DFF'
+        ></path>
+      </svg>
+    </span>
+  </div>
+</button>
+
     <div className="date-time-container">
       <div className='date-time'>
       <div className='time-date'>
@@ -125,7 +146,10 @@ export default function SeatBookingList() {
       <div>{generateSeats(seats)}</div>
       <div>
       {selectedSeats?.length>0 &&(
-        <h4>Selected Seats : {displaySeats.join(", ")}</h4>
+        <>
+          <h4>Selected Seats : {displaySeats.join(", ")}</h4>
+          <h6>Total Price : {displaySeats.length*200}</h6>
+        </>
       )}
     <button id="button" className="book-button" onClick={handleSubmit} disabled={selectedSeats.length <= 0}>
       Book Now

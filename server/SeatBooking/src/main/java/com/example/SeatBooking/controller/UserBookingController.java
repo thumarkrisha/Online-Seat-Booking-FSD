@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @CrossOrigin
@@ -44,8 +46,14 @@ public class UserBookingController {
         return userBookingRepo.findBookedSeatsByDateAndTime(date, time);
     }
 
+    @GetMapping("/fetchbooked")
+    public List<String> getFetchBooked(@RequestParam String pnrNumber){
+        return userBookingRepo.findSeatsByPnrNumber(pnrNumber);
+    }
+    @CrossOrigin(origins = "*", methods = {RequestMethod.DELETE, RequestMethod.OPTIONS})
     @DeleteMapping("/cancelling")
-    public ResponseEntity<String> cancelBooking(@RequestParam String pnrNumber, @RequestParam String seatNo) {
+    public ResponseEntity<String> cancelBooking(@RequestParam String pnrNumber, @RequestParam String seatNos) {
+        List<String> seatNo = Arrays.asList(seatNos.split(","));
         UserBooking userBooking = userBookingRepo.findByPnrNumber(pnrNumber);
 
         if (userBooking == null) {
@@ -53,27 +61,28 @@ public class UserBookingController {
         }
 
         List<String> seats = userBooking.getSeats();
-        if (!seats.contains(seatNo)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Seat not booked");
-        }
+        List<String> seatsToRemove = new ArrayList<>();
 
-        // Remove the seat from the seats list
-        seats.remove(seatNo);
-
-        // Delete the associated booking detail
-        List<BookingDetail> bookingDetails = bookingDetailRepo.findByUserBooking(userBooking);
-        for (BookingDetail bookingDetail : bookingDetails) {
-            if (bookingDetail.getSeatNo().equals(seatNo)) {
-                bookingDetailRepo.delete(bookingDetail);
-                break;
+        for (String seat : seatNo) {
+            if (!seats.contains(seat)) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Seat " + seat + " not booked");
             }
+            seatsToRemove.add(seat);
         }
+
+
+        // Remove the seats from the seats list
+        seats.removeAll(seatsToRemove);
+
+        // Delete the associated booking details
+        List<BookingDetail> bookingDetails = bookingDetailRepo.findByUserBookingAndSeatNoIn(userBooking, seatsToRemove);
+        bookingDetailRepo.deleteInBatch(bookingDetails);
 
         // Update the UserBooking entity
         userBooking.setSeats(seats);
         userBookingRepo.save(userBooking);
 
-        return ResponseEntity.ok("Seat canceled successfully");
+        return ResponseEntity.ok("Seats canceled successfully");
     }
 
 }
