@@ -59,7 +59,7 @@ export default function BookingForm() {
   
  await axios.post('http://localhost:8080/api/userbooking/booking', booking, {
   params: {
-    username: sessionStorage.getItem('username')
+    username: localStorage.getItem('username')
   },
   headers: {
     'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ export default function BookingForm() {
         bookingData,
         {
           params: {
-            username: sessionStorage.getItem('username'),
+            username: localStorage.getItem('username'),
             pnrNumber:uniqueNumber
             }
         }
