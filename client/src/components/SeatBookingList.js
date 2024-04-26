@@ -106,7 +106,7 @@ export default function SeatBookingList() {
       <div className='date-time'>
       <div className='time-date'>
     <label>Date:</label>
-    <input type="date" defaultValue={new Date().toISOString().split('T')[0]} selected={selectedDate} onChange={(e) => {
+    <input type="date" defaultValue={new Date().toISOString().split('T')[0]} min={new Date().toISOString().split('T')[0]} selected={selectedDate} onChange={(e) => {
     const dateValue = e.target.value;
     setSelectedDate(dateValue);
     console.log('Selected Date:', dateValue);
